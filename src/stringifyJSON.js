@@ -6,37 +6,41 @@
 
 var stringifyJSON = function(obj){
 
+	
 	//check to see if obj = array or legit object
 	if (typeof obj !== 'object' || !Array.isArray(obj)){
 		if (typeof obj === 'string'){
-			return "\"" + obj + "\""
-		}
-		else if (obj != null && obj != undefined){
-			return obj.toString()
+			
+				return "\"" + obj + "\""
+			
+		} 
+		else if (obj != null && obj != undefined ){
+			
+				return obj.toString()
+			
 		}else {
-			if (obj === null){
+			if (obj === null ){
 				return 'null'
 			}
 			else if (obj === undefined){
 				return 'undefined'
 			}
-		}
-	}else {
+		} 
+	} 
+	else {
 		//if we have an array 
 		alert(typeof obj)
 		if (Array.isArray(obj)){
 			if (obj.length > 0){
-				var newArray = _.map(obj,function(element){
-					return stringifyJSON(element)
-				})
-				return newArray
+
+				return "[" + _.map(obj, stringifyJSON).toString() + "]"
 			}
 			else {
 				return '[]'
 			}
-			
 		}else if (typeof obj === 'object'){
 			//map values to new object using the key value pairs
+			alert("we have an object here")
 		}
 	}
 
