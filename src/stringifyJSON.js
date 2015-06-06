@@ -5,10 +5,9 @@
 //VERSION 2
 
 var stringifyJSON = function(obj){
-
 	
-	//check to see if obj = array or legit object
-	if (typeof obj !== 'object' || !Array.isArray(obj)){
+	//check to see if obj = array or legit object/ this is the base case
+	if (obj === null || obj == undefined || typeof obj !== 'object' && !Array.isArray(obj)){
 		if (typeof obj === 'string'){
 			
 				return "\"" + obj + "\""
@@ -29,7 +28,7 @@ var stringifyJSON = function(obj){
 	} 
 	else {
 		//if we have an array 
-		alert(typeof obj)
+
 		if (Array.isArray(obj)){
 			if (obj.length > 0){
 
@@ -38,9 +37,23 @@ var stringifyJSON = function(obj){
 			else {
 				return '[]'
 			}
-		}else if (typeof obj === 'object'){
+		} else if (typeof obj === 'object'){
 			//map values to new object using the key value pairs
-			alert("we have an object here")
+			if (Object.keys(obj).length > 0){
+				_.each(obj,function(value,key){
+					if (obj[key] === undefined || typeof obj[key] === 'function'){
+						delete obj[key]
+					}
+				})
+				return "{" + _.map(obj,function(value,key,list){ 
+						return stringifyJSON(key) + ":" + stringifyJSON(value)
+
+			}) + "}"
+
+			}else {
+
+				return '{}'
+			}
 		}
 	}
 

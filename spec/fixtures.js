@@ -23,6 +23,7 @@ var stringifiableObjects = [
   {"a":["b", "c"]},
   [{"a":"b"}, {"c":"d"}],
   {"a":[],"c": {}, "b": true}
+  
 ];
 
 // used for stringifyJSON spec
